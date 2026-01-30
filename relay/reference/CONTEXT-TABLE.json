@@ -1,0 +1,978 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "last_updated": 1738195200000,
+  "frozen": true,
+  "human_freeze_ack": true,
+  "toc_commit_ref": "toc@c0",
+  "description": "Machine-readable index of all Relay documentation - enables navigation, audit, and future HUD integration",
+  "documents": [
+    {
+      "doc_id": "relay_context_map",
+      "path": "RELAY-CONTEXT-MAP.md",
+      "title": "Relay Context Map - Entry Point",
+      "audience": ["general"],
+      "layer": "context",
+      "depends_on": [],
+      "source_of_truth_refs": [],
+      "entry_points": [
+        "Where do I start?",
+        "What is Relay?",
+        "Which document should I read?"
+      ],
+      "last_verified_commit": "initial",
+      "status": "locked"
+    },
+    {
+      "doc_id": "architecture_index",
+      "path": "architecture/ARCHITECTURE-INDEX.md",
+      "title": "Architecture Index - Physics Layer",
+      "audience": ["developer", "auditor", "policy_maker"],
+      "layer": "physics",
+      "depends_on": ["relay_context_map"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c2"},
+        {"type": "architecture", "ref": "c3"},
+        {"type": "architecture", "ref": "c4"},
+        {"type": "architecture", "ref": "c5"},
+        {"type": "architecture", "ref": "c6"},
+        {"type": "architecture", "ref": "c7"},
+        {"type": "architecture", "ref": "c8"},
+        {"type": "architecture", "ref": "c9"},
+        {"type": "architecture", "ref": "c10"},
+        {"type": "architecture", "ref": "c11"},
+        {"type": "architecture", "ref": "c12"},
+        {"type": "architecture", "ref": "c13"},
+        {"type": "architecture", "ref": "c14"},
+        {"type": "architecture", "ref": "c15"},
+        {"type": "architecture", "ref": "c16"}
+      ],
+      "entry_points": [
+        "What are Relay's physics?",
+        "What invariants exist?",
+        "What depends on what?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "how_to_read_relay",
+      "path": "reference/HOW-TO-READ-RELAY.md",
+      "title": "How to Read Relay - Reading Guide",
+      "audience": ["general"],
+      "layer": "reference",
+      "depends_on": ["relay_context_map"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c12"}
+      ],
+      "entry_points": [
+        "How do I read Relay docs?",
+        "What is a filament?",
+        "What is zoom?",
+        "What is hold/bind?"
+      ],
+      "last_verified_commit": "initial",
+      "status": "locked"
+    },
+    {
+      "doc_id": "relay_objects_reference",
+      "path": "reference/RELAY-OBJECTS-REFERENCE.md",
+      "title": "Relay Objects Reference - Canonical Definitions",
+      "audience": ["developer", "auditor"],
+      "layer": "reference",
+      "depends_on": ["architecture_index"],
+      "source_of_truth_refs": [],
+      "entry_points": [
+        "What objects exist in Relay?",
+        "What is a ForceUnit?",
+        "What is a MeaningFrame?",
+        "What fields does Building have?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "work_in_relay",
+      "path": "guides/WORK-IN-RELAY.md",
+      "title": "Work in Relay - For Employees",
+      "audience": ["employee"],
+      "layer": "projection",
+      "depends_on": ["how_to_read_relay", "architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c7"},
+        {"type": "architecture", "ref": "c10"},
+        {"type": "architecture", "ref": "c12"},
+        {"type": "object", "ref": "Task"},
+        {"type": "object", "ref": "IdentityFilament"},
+        {"type": "object", "ref": "SCV"}
+      ],
+      "entry_points": [
+        "How do I work in Relay?",
+        "What is my career path?",
+        "How do I get paid?",
+        "What are SCVs?",
+        "How do I advance?"
+      ],
+      "last_verified_commit": "c12",
+      "status": "locked"
+    },
+    {
+      "doc_id": "scope_and_authority",
+      "path": "guides/SCOPE-AND-AUTHORITY-IN-RELAY.md",
+      "title": "Scope and Authority in Relay - For Managers",
+      "audience": ["manager"],
+      "layer": "projection",
+      "depends_on": ["how_to_read_relay", "architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c8"},
+        {"type": "architecture", "ref": "c13"},
+        {"type": "object", "ref": "Zone"},
+        {"type": "object", "ref": "DelegatedInfluence"}
+      ],
+      "entry_points": [
+        "What is my role as manager?",
+        "How do I set constraints?",
+        "What is my authority?",
+        "How do I resolve conflicts?"
+      ],
+      "last_verified_commit": "c13",
+      "status": "locked"
+    },
+    {
+      "doc_id": "auditor_guide",
+      "path": "AUDITOR-GUIDE-RELAY-GAPP.md",
+      "title": "Relay Auditor Guide - Understanding Relay GAPP & NIST",
+      "audience": ["auditor"],
+      "layer": "projection",
+      "depends_on": ["architecture_index", "relay_objects_reference"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c16"},
+        {"type": "object", "ref": "AuditAssertion"},
+        {"type": "object", "ref": "MaterialityRule"},
+        {"type": "object", "ref": "AuditEvidence"},
+        {"type": "object", "ref": "AuditFinding"},
+        {"type": "object", "ref": "AuditOpinion"},
+        {"type": "audit_assertion", "ref": "Existence"},
+        {"type": "audit_assertion", "ref": "Completeness"},
+        {"type": "audit_assertion", "ref": "Accuracy"}
+      ],
+      "entry_points": [
+        "How do I audit Relay?",
+        "What is Relay GAPP?",
+        "How does GAAP map to Relay?",
+        "What are my audit procedures?",
+        "How do I issue an opinion?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "developer_guide",
+      "path": "guides/RELAY-DEVELOPER-GUIDE.md",
+      "title": "Relay Developer Guide - Implementation Standards",
+      "audience": ["developer"],
+      "layer": "projection",
+      "depends_on": ["architecture_index", "relay_objects_reference"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c5"},
+        {"type": "architecture", "ref": "c12"},
+        {"type": "architecture", "ref": "c16"}
+      ],
+      "entry_points": [
+        "How do I implement Relay features?",
+        "What are the invariants?",
+        "How do I write tests?",
+        "What is forbidden?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "governance_in_relay",
+      "path": "guides/GOVERNANCE-IN-RELAY.md",
+      "title": "Governance in Relay - For Policy Makers",
+      "audience": ["policy_maker"],
+      "layer": "projection",
+      "depends_on": ["architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c8"},
+        {"type": "architecture", "ref": "c13"},
+        {"type": "object", "ref": "Vote"},
+        {"type": "object", "ref": "Zone"}
+      ],
+      "entry_points": [
+        "How does governance work?",
+        "How do I vote?",
+        "What is delegated influence?",
+        "How are zones governed?"
+      ],
+      "last_verified_commit": "c13",
+      "status": "locked"
+    },
+    {
+      "doc_id": "military_conflict_in_relay",
+      "path": "guides/MILITARY-AND-CONFLICT-IN-RELAY.md",
+      "title": "Military and Conflict in Relay - For Defense Analysts",
+      "audience": ["defense_analyst"],
+      "layer": "projection",
+      "depends_on": ["architecture_index", "relay_objects_reference"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c15"},
+        {"type": "object", "ref": "ForceUnit"},
+        {"type": "object", "ref": "DamageScar"},
+        {"type": "object", "ref": "Lens"}
+      ],
+      "entry_points": [
+        "How are military assets tracked?",
+        "What is LOD?",
+        "How do I detect escalation?",
+        "What are lenses?"
+      ],
+      "last_verified_commit": "c15",
+      "status": "locked"
+    },
+    {
+      "doc_id": "ai_collaboration",
+      "path": "guides/AI-COLLABORATION-IN-RELAY.md",
+      "title": "AI Collaboration in Relay - For AI Operators",
+      "audience": ["ai_operator", "developer"],
+      "layer": "projection",
+      "depends_on": ["architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c11"},
+        {"type": "architecture", "ref": "c12"},
+        {"type": "object", "ref": "SCV"},
+        {"type": "object", "ref": "TrainingPack"},
+        {"type": "object", "ref": "DialogContextBundle"}
+      ],
+      "entry_points": [
+        "How do I work with SCVs?",
+        "What is Root AI?",
+        "What are training packs?",
+        "How do I delegate tasks?"
+      ],
+      "last_verified_commit": "c12",
+      "status": "locked"
+    },
+    {
+      "doc_id": "relay_gapp_spec",
+      "path": "reference/RELAY-GAPP-SPECIFICATION.md",
+      "title": "Relay GAPP - 8 Universal Principles",
+      "audience": ["auditor", "developer"],
+      "layer": "reference",
+      "depends_on": ["architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c16"}
+      ],
+      "entry_points": [
+        "What are GAPP principles?",
+        "How does audit work universally?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "relay_nist_controls",
+      "path": "reference/RELAY-NIST-CONTROLS.md",
+      "title": "Relay NIST - Operational Assurance Controls",
+      "audience": ["auditor", "developer"],
+      "layer": "reference",
+      "depends_on": ["architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c16"}
+      ],
+      "entry_points": [
+        "What security controls exist?",
+        "How does NIST map to Relay?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "traditional_standards_mapping",
+      "path": "reference/TRADITIONAL-STANDARDS-MAPPING.md",
+      "title": "Traditional Standards → Relay Mapping",
+      "audience": ["auditor"],
+      "layer": "reference",
+      "depends_on": ["auditor_guide", "relay_gapp_spec"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c16"}
+      ],
+      "entry_points": [
+        "How does GAAP map to Relay?",
+        "How does IFRS map to Relay?",
+        "How does ISO map to Relay?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "pr_roadmap",
+      "path": "implementation/PR-ROADMAP.md",
+      "title": "Pull Request Roadmap - All Implementation Phases",
+      "audience": ["developer"],
+      "layer": "implementation",
+      "depends_on": ["architecture_index", "relay_objects_reference"],
+      "source_of_truth_refs": [],
+      "entry_points": [
+        "What needs to be built?",
+        "What's the implementation order?",
+        "What PRs exist?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "draft"
+    },
+    {
+      "doc_id": "relay_in_100_words",
+      "path": "summaries/RELAY-IN-100-WORDS.md",
+      "title": "Relay in 100 Words - Elevator Pitch",
+      "audience": ["general"],
+      "layer": "context",
+      "depends_on": [],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c10"}
+      ],
+      "entry_points": [
+        "What is Relay in one paragraph?"
+      ],
+      "last_verified_commit": "c10",
+      "status": "locked"
+    },
+    {
+      "doc_id": "master_prompt_spec",
+      "path": "reference/MASTER-PROMPT-SPECIFICATION.md",
+      "title": "Master Prompt Filament - Construction Protocol",
+      "audience": ["developer", "auditor", "reconstruction"],
+      "layer": "genesis",
+      "depends_on": [],
+      "source_of_truth_refs": [],
+      "entry_points": [
+        "How was Relay built?",
+        "What was the construction sequence?",
+        "How do I reconstruct Relay?",
+        "What invariants were discovered when?"
+      ],
+      "last_verified_commit": "initial",
+      "status": "locked"
+    },
+    {
+      "doc_id": "master_conversation_spec",
+      "path": "reference/MASTER-CONVERSATION-SPECIFICATION.md",
+      "title": "Master Conversation Filament - Reasoning Path",
+      "audience": ["learner", "developer"],
+      "layer": "genesis",
+      "depends_on": ["master_prompt_spec"],
+      "source_of_truth_refs": [],
+      "entry_points": [
+        "How was Relay learned?",
+        "What was the reasoning process?",
+        "How do I learn Relay by walking the path?",
+        "What breakthroughs happened?"
+      ],
+      "last_verified_commit": "initial",
+      "status": "locked"
+    },
+    {
+      "doc_id": "genesis_evidence_pack",
+      "path": "reference/GENESIS-EVIDENCE-PACK-SPECIFICATION.md",
+      "title": "Genesis Evidence Pack - Messy Source Corpus",
+      "audience": ["reconstruction", "learner", "auditor"],
+      "layer": "genesis",
+      "depends_on": ["master_prompt_spec", "master_conversation_spec"],
+      "source_of_truth_refs": [],
+      "entry_points": [
+        "What source materials existed?",
+        "Why was Relay necessary?",
+        "What chaos motivated the system?",
+        "How do I see the original mess?",
+        "Rebuild Relay from messy reality"
+      ],
+      "last_verified_commit": "initial",
+      "status": "locked"
+    },
+    {
+      "doc_id": "why_relay_teaches_itself",
+      "path": "reference/WHY-RELAY-TEACHES-ITSELF.md",
+      "title": "Why Relay Teaches Itself - Self-Enforcing Architecture",
+      "audience": ["learner", "developer", "reconstruction"],
+      "layer": "meta",
+      "depends_on": ["master_prompt_spec", "master_conversation_spec", "architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c16"}
+      ],
+      "entry_points": [
+        "Why does Relay feel inevitable?",
+        "How does Relay teach itself?",
+        "Why can't I stop before completion?",
+        "What is the self-enforcing property?",
+        "How do future builders learn Relay?"
+      ],
+      "last_verified_commit": "initial",
+      "status": "locked"
+    },
+    {
+      "doc_id": "complete_relay_experience",
+      "path": "COMPLETE-RELAY-EXPERIENCE.md",
+      "title": "The Complete Relay Experience - Full User Journey",
+      "audience": ["general", "employee", "developer", "designer"],
+      "layer": "projection",
+      "depends_on": ["relay_context_map", "how_to_read_relay", "architecture_index", "relay_objects_reference"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c5"},
+        {"type": "architecture", "ref": "c7"},
+        {"type": "architecture", "ref": "c8"},
+        {"type": "architecture", "ref": "c9"},
+        {"type": "architecture", "ref": "c10"},
+        {"type": "architecture", "ref": "c12"},
+        {"type": "architecture", "ref": "c13"},
+        {"type": "architecture", "ref": "c14"},
+        {"type": "architecture", "ref": "c15"}
+      ],
+      "entry_points": [
+        "What does using Relay feel like day-to-day?",
+        "How do HUD/globe/tasks/zones/presence interact?",
+        "Show me the complete integrated experience",
+        "How do all the features work together?"
+      ],
+      "last_verified_commit": "c15",
+      "status": "locked",
+      "note": "Projection document (non-normative). If conflicts with architecture, architecture wins."
+    },
+    {
+      "doc_id": "relay_film_spec",
+      "path": "reference/RELAY-FILM-SPECIFICATION.md",
+      "title": "Relay Film Specification - Rebuild from Movie",
+      "audience": ["general", "learner", "reconstruction", "designer"],
+      "layer": "genesis",
+      "depends_on": ["complete_relay_experience", "master_prompt_spec", "architecture_index", "hud_help_layer"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c2"},
+        {"type": "architecture", "ref": "c8"},
+        {"type": "architecture", "ref": "c9"},
+        {"type": "architecture", "ref": "c10"},
+        {"type": "architecture", "ref": "c11"},
+        {"type": "architecture", "ref": "c12"},
+        {"type": "architecture", "ref": "c13"},
+        {"type": "architecture", "ref": "c16"}
+      ],
+      "entry_points": [
+        "How do I rebuild Relay from the movie?",
+        "What is the visual grammar?",
+        "How does the film teach Relay intuitively?",
+        "What is the interruptibility primitive?",
+        "Film as genesis artifact",
+        "How does the film decompose into training units?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "hud_help_layer",
+      "path": "reference/HUD-HELP-LAYER-SPECIFICATION.md",
+      "title": "HUD Help Layer - Object-Embedded Training System",
+      "audience": ["developer", "designer", "implementer"],
+      "layer": "reference",
+      "depends_on": ["relay_film_spec", "architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c2"},
+        {"type": "architecture", "ref": "c11"},
+        {"type": "architecture", "ref": "c12"}
+      ],
+      "entry_points": [
+        "How does Help work in Relay?",
+        "What is object-embedded training?",
+        "How are training units structured?",
+        "What are the three explanation modes?",
+        "How does the HUD character system work?",
+        "What is STOP/HOLD/FORK for training?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "themes_customization",
+      "path": "reference/THEMES-CUSTOMIZATION-SPECIFICATION.md",
+      "title": "Themes & Customization - Tradeable First-Class Filaments",
+      "audience": ["developer", "designer", "user", "marketplace"],
+      "layer": "reference",
+      "depends_on": ["hud_help_layer", "architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c2"}
+      ],
+      "entry_points": [
+        "How do themes work in Relay?",
+        "What is a theme pack?",
+        "How do I customize my HUD character?",
+        "What are lens mappings?",
+        "How does the theme marketplace work?",
+        "What are theme safety rules?",
+        "How do I build/trade/use themes?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "globe_time_space",
+      "path": "reference/GLOBE-TIME-SPACE-MODEL.md",
+      "title": "Globe-Time-Space Model - History as Depth, Unknown as Distance",
+      "audience": ["developer", "designer", "general", "learner"],
+      "layer": "reference",
+      "depends_on": ["architecture_index", "relay_film_spec", "complete_relay_experience"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c2"},
+        {"type": "architecture", "ref": "c8"},
+        {"type": "architecture", "ref": "c9"}
+      ],
+      "entry_points": [
+        "How does history work in Relay?",
+        "What are day-shells?",
+        "How do I drill down into the past?",
+        "How does space exploration work?",
+        "What are unconnected filaments?",
+        "How do votes clarify history?",
+        "What is canon selection?",
+        "How does citizen science work?",
+        "What is the three-axis model?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "voting_system_alignment",
+      "path": "reference/VOTING-SYSTEM-ALIGNMENT.md",
+      "title": "Voting System Alignment - Original Backend vs Current Model",
+      "audience": ["developer", "architect", "implementer"],
+      "layer": "reference",
+      "depends_on": ["globe_time_space", "architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c8"}
+      ],
+      "entry_points": [
+        "How does voting work in Relay?",
+        "Are there conflicts between models?",
+        "What are the two vote types?",
+        "How do support votes differ from canon votes?",
+        "What needs to be modified?",
+        "Is the original system intact?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "vote_turbulence_visualization",
+      "path": "reference/VOTE-TURBULENCE-VISUALIZATION-SPEC.md",
+      "title": "Vote Turbulence Visualization - Live Physics Layer for Community Belief",
+      "audience": ["developer", "designer", "implementer", "3d_artist"],
+      "layer": "reference",
+      "depends_on": ["voting_system_alignment", "globe_time_space", "architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c8"}
+      ],
+      "entry_points": [
+        "How is voting visualized?",
+        "What is the thermal field?",
+        "How do I show vote turbulence?",
+        "What are the five thermal signals?",
+        "How does LOD work for votes?",
+        "What are alert tiers?",
+        "How does contextual normalization work?",
+        "What is belief vs evidence?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "voting_system_completion",
+      "path": "reference/VOTING-SYSTEM-COMPLETION-CERTIFICATE.md",
+      "title": "Voting System Completion Certificate - Design Complete, Implementation Handoff",
+      "audience": ["developer", "architect", "implementer", "project_manager"],
+      "layer": "reference",
+      "depends_on": ["voting_system_alignment", "vote_turbulence_visualization", "globe_time_space", "architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c8"}
+      ],
+      "entry_points": [
+        "Is voting design complete?",
+        "What verification does Claude need?",
+        "What are the implementation phases?",
+        "What are the canonical invariants?",
+        "How do I verify correct implementation?",
+        "What is the handoff checklist?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "backend_legacy_audit",
+      "path": "reference/BACKEND-LEGACY-AUDIT.md",
+      "title": "Backend Legacy Audit - Complete Review of RelayCodeBaseV93",
+      "audience": ["developer", "architect", "migration_team"],
+      "layer": "reference",
+      "depends_on": ["architecture_index", "voting_system_alignment"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c8"},
+        {"type": "architecture", "ref": "c13"}
+      ],
+      "entry_points": [
+        "What was built in the old backend?",
+        "What needs to be preserved?",
+        "How does legacy map to new architecture?",
+        "What integration tasks are needed?",
+        "Are any ideas lost?",
+        "What should be deprecated?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "reconciliation_protocol",
+      "path": "reference/RECONCILIATION-PROTOCOL.md",
+      "title": "Reconciliation Protocol - The Missing Primitive (Mandatory Feedback Loop Closure)",
+      "audience": ["developer", "architect", "system_designer", "security_engineer"],
+      "layer": "foundation",
+      "depends_on": ["architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c2"},
+        {"type": "architecture", "ref": "c8"}
+      ],
+      "entry_points": [
+        "Why do systems fail?",
+        "What is the reconciliation bug?",
+        "How does Relay prevent state divergence?",
+        "Why don't permissions stay open?",
+        "How is AI alignment enforced?",
+        "What is double-entry accounting for meaning?",
+        "How does this prevent war?",
+        "Why is this the keystone?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "the_relay_thesis",
+      "path": "reference/THE-RELAY-THESIS.md",
+      "title": "The Relay Thesis - Why the Old World Fails, Why Relay Works, and Why This Is Inevitable",
+      "audience": ["all"],
+      "layer": "foundation",
+      "depends_on": [],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c2"},
+        {"type": "architecture", "ref": "c7"},
+        {"type": "architecture", "ref": "c8"},
+        {"type": "architecture", "ref": "c10"},
+        {"type": "architecture", "ref": "c13"}
+      ],
+      "entry_points": [
+        "Why does the old world fail?",
+        "What is Relay's foundational principle?",
+        "Why do feedback loops explode?",
+        "Why does automation fail?",
+        "What is walls vs ladders?",
+        "What is mandatory reconciliation?",
+        "How does Relay collapse the dimension?",
+        "Why is this inevitable?",
+        "What is the Reconciliation Collapse Law?",
+        "Why did blockchains fail?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked",
+      "note": "SUPERSEDES all other documents in case of conflict. Foundation-layer canonical."
+    },
+    {
+      "doc_id": "backend_implementation_guide_git",
+      "path": "reference/BACKEND-IMPLEMENTATION-GUIDE-FOR-GIT-DEVELOPER.md",
+      "title": "Backend Implementation Guide for Git Developer - Rigorous Technical Specification",
+      "audience": ["backend_developer", "git_expert", "replication_engineer"],
+      "layer": "implementation",
+      "depends_on": ["the_relay_thesis", "reconciliation_protocol", "voting_system_alignment"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c2"},
+        {"type": "architecture", "ref": "c8"}
+      ],
+      "entry_points": [
+        "How do I implement Relay backend?",
+        "What is the smallest runnable slice?",
+        "How does Git become the operating system?",
+        "What is mandatory reconciliation?",
+        "How do commits work for coordination?",
+        "What is STOP/HOLD/FORK?",
+        "How does vote turbulence work?",
+        "What are the attack vectors?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked"
+    },
+    {
+      "doc_id": "commit_creation_at_location",
+      "path": "reference/COMMIT-CREATION-AT-LOCATION.md",
+      "title": "Commit-at-Location Law - The Third Foundational Invariant (No Floating State)",
+      "audience": ["developer", "architect", "implementer", "all"],
+      "layer": "foundation",
+      "depends_on": ["the_relay_thesis", "reconciliation_protocol"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"}
+      ],
+      "entry_points": [
+        "Why do files get lost?",
+        "What is floating state?",
+        "How does Relay prevent orphaned files?",
+        "What is commit-at-location?",
+        "Why no Save As dialog?",
+        "How does HUD create files?",
+        "What are the three foundational laws?",
+        "How does this relate to reconciliation?"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked",
+      "note": "Third foundational invariant alongside reconciliation and authority expiry."
+    },
+    {
+      "doc_id": "for_ari_complete_vision_and_spec",
+      "path": "reference/FOR-ARI-THE-COMPLETE-VISION-AND-SPEC.md",
+      "title": "For Ari - The Complete Vision & Technical Specification (FINAL)",
+      "audience": ["backend_developer", "git_expert", "ari", "all"],
+      "layer": "foundation + implementation",
+      "depends_on": ["the_relay_thesis", "reconciliation_protocol", "commit_creation_at_location", "voting_system_alignment"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c2"},
+        {"type": "architecture", "ref": "c8"}
+      ],
+      "entry_points": [
+        "Complete vision + spec for Ari",
+        "10 concrete walkthroughs",
+        "Battlecruiser OS example",
+        "Why war stops (sailors taking selfies)",
+        "Purchase request (Excel → reality)",
+        "Time is playable",
+        "Voting on history and KPIs",
+        "Users as double-entry ledgers",
+        "MMORPG-style collaboration",
+        "Space exploration",
+        "The whole system at once",
+        "30 disciplines this applies to",
+        "Phase 1 implementation",
+        "Attack vectors",
+        "StarCraft replay analogy",
+        "The inevitability"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked",
+      "note": "THE definitive document for Ari. Combines vision (10 experiential walkthroughs), technical depth (backend specs, Rust examples), 30 disciplines, and inevitability framing. Shows rather than explains. LOTR version of software."
+    },
+    {
+      "doc_id": "relay_globe_view_visualization",
+      "path": "reference/RELAY-GLOBE-VIEW-VISUALIZATION.md",
+      "title": "Relay Globe View - 3D Visualization (ASCII Reference)",
+      "audience": ["all", "developer", "designer", "stakeholder"],
+      "layer": "visualization",
+      "depends_on": ["globe_time_space", "vote_turbulence_visualization"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "visualization", "ref": "globe_time_space"}
+      ],
+      "entry_points": [
+        "What does Relay look like?",
+        "3D globe view",
+        "ASCII visualization",
+        "Surface/history/space layers",
+        "Heat and activity rendering",
+        "Privacy visualization (blur/existence)",
+        "Camera controls (WASD)",
+        "LOD system",
+        "User navigation",
+        "Thermal state display",
+        "How to read the globe",
+        "Complete visual reference"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked",
+      "note": "ASCII art representation of complete Relay 3D world. Shows surface (operating state), history depth (day-shells), space layer (distance shells), users flying, heat indicators, public vs private filaments, buildings, connections. Complete legend and technical implementation notes."
+    },
+    {
+      "doc_id": "time_control_slow_motion_follow_mode",
+      "path": "reference/TIME-CONTROL-AND-SLOW-MOTION-FOLLOW-MODE.md",
+      "title": "Time Control & Slow-Motion Follow Mode (AI Safety + Human Learning)",
+      "audience": ["all", "ai_safety", "developer", "regulator", "educator"],
+      "layer": "foundation + ai_safety",
+      "depends_on": ["the_relay_thesis", "reconciliation_protocol"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c2"}
+      ],
+      "entry_points": [
+        "How do I observe AI reasoning?",
+        "What is slow-motion follow mode?",
+        "How do I replay AI decisions?",
+        "AI transparency and safety",
+        "Time control in Relay",
+        "Observer attachment",
+        "Playback controls (pause, rewind, step)",
+        "Learning by observation",
+        "AI evaluation and regulation",
+        "Error analysis and improvement",
+        "Trust through visibility",
+        "Human training via replay",
+        "Chess/surgery/athletics replay analogy"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked",
+      "note": "KEYSTONE MODULE. Time = commitIndex sequence. Slow-motion follow mode lets observers attach to any filament (AI or human) and replay commit-by-commit at human speed. AI opacity is speed problem, not complexity. Enables AI safety, human learning, error analysis, trust. Uses existing primitives (commits, authority, refs). Three concrete examples: AI research, surgery, chess. Changes AI evaluation, regulation, training immediately."
+    },
+    {
+      "doc_id": "surface_is_now_depth_is_history",
+      "path": "reference/SURFACE-IS-NOW-DEPTH-IS-HISTORY.md",
+      "title": "Surface Is Now, Depth Is History (Core Insight)",
+      "audience": ["all", "stakeholder", "philosopher", "anyone"],
+      "layer": "foundation",
+      "depends_on": ["globe_time_space", "relay_globe_view_visualization"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "visualization", "ref": "globe_time_space"}
+      ],
+      "entry_points": [
+        "Why does history matter?",
+        "What is depth in Relay?",
+        "Why things resurface",
+        "History as geology",
+        "Surface vs underground",
+        "Load-bearing structures",
+        "Why nationalism returns",
+        "Why companies repeat mistakes",
+        "Ancient constraints on modern action",
+        "The present is thin",
+        "History is under us not behind us",
+        "Foundational insight"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked",
+      "note": "FOUNDATIONAL INSIGHT. Surface = current operating state (thin, now). Underground = accumulated history (thick, structural, load-bearing). History is not behind us temporally, it's under us spatially. When things resurface (nationalism, war, patterns), it's because filament never ended. This is geography, not narrative. Stabilizes understanding: you're not inventing extremes, you're revealing structure. Three examples: military doctrine, company culture, national identity."
+    },
+    {
+      "doc_id": "thin_slice_definition",
+      "path": "implementation/THIN-SLICE-DEFINITION.md",
+      "title": "Thin Slice Definition - Backend Requirements",
+      "audience": ["developer"],
+      "layer": "implementation",
+      "depends_on": ["architecture_index", "relay_objects_reference"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c2"},
+        {"type": "architecture", "ref": "c5"}
+      ],
+      "entry_points": [
+        "What backend slices are required?",
+        "How do I implement Relay backend?",
+        "What is a thin slice?",
+        "What tests are required?"
+      ],
+      "last_verified_commit": "c5",
+      "status": "locked"
+    },
+    {
+      "doc_id": "relaysim_mock_backend",
+      "path": "implementation/RELAYSIM-MOCK-BACKEND.md",
+      "title": "RelaySim - Mock Backend Implementation",
+      "audience": ["developer"],
+      "layer": "implementation",
+      "depends_on": ["thin_slice_definition", "architecture_index"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c1"},
+        {"type": "architecture", "ref": "c2"}
+      ],
+      "entry_points": [
+        "How do I build RelaySim?",
+        "What is the minimal backend?",
+        "How do I analyze the developer repo?",
+        "How do I generate graphs?"
+      ],
+      "last_verified_commit": "c2",
+      "status": "locked"
+    },
+    {
+      "doc_id": "system_review_and_next_steps",
+      "path": "SYSTEM-REVIEW-AND-NEXT-STEPS.md",
+      "title": "System Review and Next Steps - Comprehensive Status",
+      "audience": ["general"],
+      "layer": "context",
+      "depends_on": ["relay_context_map"],
+      "source_of_truth_refs": [],
+      "entry_points": [
+        "Where are all the docs?",
+        "What should I do next?",
+        "Is the system complete?",
+        "How do I start?"
+      ],
+      "last_verified_commit": "initial",
+      "status": "locked"
+    },
+    {
+      "doc_id": "planetary_readiness_scenario",
+      "path": "scenarios/PLANETARY-READINESS-SCENARIO.md",
+      "title": "Planetary Readiness Scenario - Speculative Stress Test",
+      "audience": ["developer", "policy_maker", "scenario_planner"],
+      "layer": "scenario",
+      "depends_on": ["architecture_index", "relay_objects_reference"],
+      "source_of_truth_refs": [
+        {"type": "architecture", "ref": "c0"},
+        {"type": "architecture", "ref": "c8"},
+        {"type": "architecture", "ref": "c12"},
+        {"type": "architecture", "ref": "c13"},
+        {"type": "architecture", "ref": "c16"}
+      ],
+      "entry_points": [
+        "How to handle extreme uncertainty?",
+        "How to coordinate without centralization?",
+        "How to prevent panic and authoritarianism?",
+        "Stress-test Relay coordination",
+        "Non-belief-based scenario planning"
+      ],
+      "last_verified_commit": "c16",
+      "status": "locked",
+      "warning": "SPECULATIVE EXERCISE ONLY - Not preparation for actual events"
+    },
+    {
+      "doc_id": "claude_prompt_planetary_readiness",
+      "path": "scenarios/CLAUDE-PROMPT-PLANETARY-READINESS.md",
+      "title": "Claude Prompt for Planetary Readiness - Implementation Guide",
+      "audience": ["developer"],
+      "layer": "scenario",
+      "depends_on": ["planetary_readiness_scenario"],
+      "source_of_truth_refs": [],
+      "entry_points": [
+        "How to implement scenario with Claude?",
+        "What prompt to use?",
+        "How to verify safety?"
+      ],
+      "last_verified_commit": "initial",
+      "status": "locked",
+      "warning": "SPECULATIVE EXERCISE ONLY - Not preparation for actual events"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+[
+  {
+    "building_id": "building.apple_store.nyc_001",
+    "building_type": "vendor",
+    "geo_anchor": {
+      "lat": 40.7637,
+      "lng": -73.9722,
+      "altitude": 10.0
+    },
+    "owner_ref": "unit.apple.admin",
+    "catalog": [
+      {
+        "product_id": "iphone_15_pro",
+        "name": "iPhone 15 Pro",
+        "price": 999.00,
+        "production_time_seconds": 3600,
+        "delivery_time_seconds": 7200,
+        "in_stock": true,
+        "metadata": {
+          "category": "electronics",
+          "sku": "MLXXX3LL/A",
+          "color": "Titanium"
+        }
+      },
+      {
+        "product_id": "macbook_air_m3",
+        "name": "MacBook Air M3",
+        "price": 1299.00,
+        "production_time_seconds": 7200,
+        "delivery_time_seconds": 14400,
+        "in_stock": true,
+        "metadata": {
+          "category": "electronics",
+          "sku": "MLYYY3LL/A",
+          "color": "Space Gray"
+        }
+      },
+      {
+        "product_id": "airpods_pro",
+        "name": "AirPods Pro",
+        "price": 249.00,
+        "production_time_seconds": 1800,
+        "delivery_time_seconds": 3600,
+        "in_stock": true,
+        "metadata": {
+          "category": "electronics",
+          "sku": "MLZZZ3LL/A"
+        }
+      }
+    ],
+    "status": "active",
+    "props": {
+      "name": "Apple Fifth Avenue",
+      "address": "767 5th Ave, New York, NY 10153",
+      "phone": "+1-212-336-1440",
+      "hours": "24/7"
+    }
+  },
+  {
+    "building_id": "building.acme_hq.sf",
+    "building_type": "partnership",
+    "geo_anchor": {
+      "lat": 37.7749,
+      "lng": -122.4194,
+      "altitude": 50.0
+    },
+    "owner_ref": "unit.acme.admin",
+    "catalog": [],
+    "status": "active",
+    "props": {
+      "company_name": "ACME Corp",
+      "address": "123 Market St, San Francisco, CA 94103",
+      "partnerships": ["supplier.widgets.001", "supplier.gadgets.002"],
+      "employees": 500
+    }
+  },
+  {
+    "building_id": "building.drone_depot.lax",
+    "building_type": "logistics",
+    "geo_anchor": {
+      "lat": 33.9416,
+      "lng": -118.4085,
+      "altitude": 25.0
+    },
+    "owner_ref": "unit.relay.logistics",
+    "catalog": [],
+    "status": "active",
+    "props": {
+      "name": "LAX Drone Hub",
+      "address": "1 World Way, Los Angeles, CA 90045",
+      "active_shipments": 0,
+      "capacity": 1000
+    }
+  }
+]

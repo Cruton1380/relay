@@ -1,0 +1,169 @@
+{
+  "schema_version": "relay-render-v1",
+  "generated_from": {
+    "endpoint": "/render/world",
+    "timestamp": 1706486400000,
+    "event_id": 42
+  },
+  "nodes": [
+    {
+      "id": "globe",
+      "kind": "globe",
+      "transform": {
+        "position": [0, 0, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "material": "globe_base",
+      "props": {
+        "radius": 6371000,
+        "texture_ref": "earth_base"
+      }
+    },
+    {
+      "id": "unit.alice.123",
+      "kind": "unit",
+      "transform": {
+        "position": [40.7128, -74.0060, 0],
+        "rotation": [0, 45, 0],
+        "scale": [1, 1, 1]
+      },
+      "material": "unit_active",
+      "props": {
+        "unit_id": "unit.alice.123",
+        "display_name": "Alice",
+        "state": "idle",
+        "authority_tokens": 1000,
+        "commitment_capacity": 5
+      }
+    },
+    {
+      "id": "building.vendor.istore.nyc_001",
+      "kind": "building",
+      "transform": {
+        "position": [40.7614, -73.9776, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "material": "building_vendor",
+      "props": {
+        "building_id": "building.vendor.istore.nyc_001",
+        "building_type": "Vendor",
+        "name": "Apple Store - Fifth Avenue",
+        "status": "Active",
+        "geo_anchor": {
+          "lat": 40.7614,
+          "lon": -73.9776,
+          "alt": 0
+        }
+      }
+    },
+    {
+      "id": "filament.work.W123",
+      "kind": "filament",
+      "transform": {
+        "position": [0, 0, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "material": "filament_causal",
+      "props": {
+        "filament_id": "work.W123",
+        "commit_count": 47,
+        "head_commit": "work.W123@c47"
+      },
+      "geometry": {
+        "type": "polyline",
+        "points": [
+          [40.7128, -74.0060, 0],
+          [40.7200, -74.0000, 10],
+          [40.7300, -73.9900, 20],
+          [40.7400, -73.9800, 30]
+        ],
+        "color": "#00FF00",
+        "width": 2.0
+      }
+    },
+    {
+      "id": "timebox.work.W123.c42",
+      "kind": "timebox",
+      "transform": {
+        "position": [40.7300, -73.9900, 20],
+        "rotation": [0, 0, 0],
+        "scale": [0.5, 0.5, 0.5]
+      },
+      "material": "timebox_commit",
+      "props": {
+        "commit_ref": "work.W123@c42",
+        "commit_index": 42,
+        "timestamp": 1706486400000,
+        "author": "alice",
+        "op_type": "TASK_COMPLETED",
+        "causal_refs": ["work.W123@c41"]
+      }
+    },
+    {
+      "id": "task.T456",
+      "kind": "task",
+      "transform": {
+        "position": [40.7614, -73.9776, 10],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "material": "task_in_progress",
+      "props": {
+        "task_id": "task.T456",
+        "task_type": "PurchaseOrder",
+        "state": "Packing",
+        "progress_percentage": 45.0,
+        "requester_ref": "user.alice",
+        "building_ref": "building.vendor.istore.nyc_001",
+        "created_at": 1706486000000,
+        "estimated_completion": 1706486600000
+      }
+    },
+    {
+      "id": "shipment.S789",
+      "kind": "shipment",
+      "transform": {
+        "position": [40.7500, -73.9700, 100],
+        "rotation": [0, 45, 0],
+        "scale": [1, 1, 1]
+      },
+      "material": "shipment_in_transit",
+      "props": {
+        "shipment_id": "shipment.S789",
+        "task_ref": "task.T456",
+        "origin_building": "building.vendor.istore.nyc_001",
+        "destination_building": "building.logistics.warehouse_42",
+        "state": "InTransit",
+        "progress_percentage": 67.0,
+        "carrier_type": "Drone",
+        "created_at": 1706486200000,
+        "estimated_arrival": 1706486800000,
+        "route": [
+          {"lat": 40.7614, "lon": -73.9776, "alt": 100},
+          {"lat": 40.7500, "lon": -73.9700, "alt": 100},
+          {"lat": 40.7400, "lon": -73.9600, "alt": 100}
+        ]
+      },
+      "geometry": {
+        "type": "polyline",
+        "points": [
+          [40.7614, -73.9776, 100],
+          [40.7500, -73.9700, 100],
+          [40.7400, -73.9600, 100]
+        ],
+        "color": "#00FF00",
+        "width": 2.0
+      }
+    }
+  ],
+  "metadata": {
+    "total_nodes": 7,
+    "bounding_box": {
+      "min": [40.7128, -74.0060, 0],
+      "max": [40.7614, -73.9600, 100]
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema_version": "relay-render-v1",
+  "generated_from": {
+    "endpoint": "/render/world",
+    "timestamp": 1706486400000
+  },
+  "nodes": [
+    {
+      "id": "globe",
+      "kind": "globe",
+      "transform": {
+        "position": [0, 0, 0],
+        "rotation": [0, 0, 0],
+        "scale": [1, 1, 1]
+      },
+      "material": "globe_base",
+      "props": {
+        "radius": 6371000,
+        "texture_ref": "earth_base"
+      }
+    }
+  ],
+  "metadata": {
+    "total_nodes": 1
+  }
+}

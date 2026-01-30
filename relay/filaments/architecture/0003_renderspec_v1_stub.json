@@ -1,0 +1,175 @@
+{
+  "$schema": "https://relay.dev/schemas/renderspec-v1.json",
+  "$comment": "RenderSpec v1 - Scene Graph Format for Layer 2 → Layer 3 Contract",
+  
+  "schema_version": "relay-render-v1",
+  "timestamp": "2026-01-28T10:00:00Z",
+  "event_id": null,
+  
+  "metadata": {
+    "scene_type": "world | commit | filament",
+    "generated_by": "relay-physics-v2",
+    "documentation": "See architecture@c3 for spec details"
+  },
+  
+  "nodes": [
+    {
+      "$comment": "Example: SCV Unit",
+      "id": "unit.alice.001",
+      "type": "unit",
+      "transform": {
+        "position": [0.0, 0.0, 0.0],
+        "rotation": [0.0, 0.0, 0.0, 1.0],
+        "scale": [1.0, 1.0, 1.0]
+      },
+      "state": "Working | Idle | Moving | Blocked | AwaitingAuthority",
+      "material": "scv_working | scv_idle | scv_moving | scv_blocked | scv_awaiting",
+      "properties": {
+        "attached_filament": "work.W123",
+        "current_task_filament": "work.W123",
+        "rank": "Engineer | Manager | Admin"
+      },
+      "animation_intents": [
+        {
+          "type": "pulse | glow | twist | decay | explode",
+          "trigger_event_id": 42,
+          "duration_ms": 500,
+          "params": {}
+        }
+      ]
+    },
+    
+    {
+      "$comment": "Example: Filament (Thread/Channel)",
+      "id": "filament.work.W123",
+      "type": "filament",
+      "segments": [
+        {
+          "from": [0.0, 0.0, 0.0],
+          "to": [1.0, 0.5, 0.2],
+          "commit_index": 1
+        },
+        {
+          "from": [1.0, 0.5, 0.2],
+          "to": [2.0, 1.0, 0.4],
+          "commit_index": 2
+        }
+      ],
+      "material": "encrypted_channel | public_filament | delegation_chain",
+      "properties": {
+        "head_commit_index": 7,
+        "rotation_params": {
+          "$comment": "For encrypted channels (visual twist)",
+          "twist_rate": 0.5,
+          "direction": "clockwise"
+        },
+        "thickness": 1.0
+      },
+      "scars": [
+        {
+          "at_commit_index": 5,
+          "reason": "AUTHORITY_DENIED | SCHEMA_INVALID | ...",
+          "position_t": 0.6
+        }
+      ]
+    },
+    
+    {
+      "$comment": "Example: Time Cube (Commit Visualization)",
+      "id": "timecube.work.W123@c7",
+      "type": "timecube",
+      "transform": {
+        "position": [2.0, 1.0, 0.4],
+        "rotation": [0.0, 0.0, 0.0, 1.0],
+        "scale": [1.0, 1.0, 1.0]
+      },
+      "material": "commit_accepted | commit_rejected",
+      "properties": {
+        "commit_ref": "work.W123@c7",
+        "op_type": "OUTPUT_PROPOSED | TASK_ASSIGN | ...",
+        "author_unit_ref": "unit.alice.001",
+        "verification_state": "accepted | rejected"
+      },
+      "causal_links": [
+        {
+          "type": "input | authority | evidence",
+          "target_id": "timecube.work.W123@c6",
+          "material": "causal_link_input | causal_link_authority | causal_link_evidence"
+        }
+      ]
+    },
+    
+    {
+      "$comment": "Example: Globe (World Container)",
+      "id": "globe.world",
+      "type": "globe",
+      "transform": {
+        "position": [0.0, 0.0, 0.0],
+        "rotation": [0.0, 0.0, 0.0, 1.0],
+        "scale": [10.0, 10.0, 10.0]
+      },
+      "material": "world_surface",
+      "properties": {
+        "radius": 10.0,
+        "segments": 64
+      }
+    }
+  ],
+  
+  "materials_reference": {
+    "$comment": "Semantic material tags (Layer 3 maps to visuals)",
+    "unit_states": [
+      "scv_working",
+      "scv_idle", 
+      "scv_moving",
+      "scv_blocked",
+      "scv_awaiting"
+    ],
+    "filament_types": [
+      "encrypted_channel",
+      "public_filament",
+      "delegation_chain"
+    ],
+    "commit_states": [
+      "commit_accepted",
+      "commit_rejected"
+    ],
+    "links": [
+      "causal_link_input",
+      "causal_link_authority",
+      "causal_link_evidence"
+    ],
+    "world": [
+      "world_surface"
+    ]
+  },
+  
+  "animation_intents_reference": {
+    "$comment": "Animation types (Layer 3 interprets)",
+    "types": [
+      "pulse",
+      "glow",
+      "twist",
+      "decay",
+      "explode"
+    ]
+  },
+  
+  "extensibility_rules": {
+    "$comment": "How to evolve this schema without breaking Layer 3",
+    "versioning": "schema_version field MUST be checked by Layer 3",
+    "unknown_fields": "Layer 3 MUST ignore unknown fields (forward compatibility)",
+    "unknown_materials": "Layer 3 SHOULD fallback to default material",
+    "unknown_types": "Layer 3 SHOULD skip unknown node types or render as placeholder"
+  },
+  
+  "implementation_status": {
+    "stub_only": true,
+    "next_steps": [
+      "Lock exact schema after PR #1.3 (commit fetch shows real data needs)",
+      "Define material tag enum vs namespace:tag strings",
+      "Define animation intent parameter schemas",
+      "Implement /render/world, /render/commit/:ref, /render/filament/:id endpoints"
+    ]
+  }
+}

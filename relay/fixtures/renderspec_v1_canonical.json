@@ -1,0 +1,184 @@
+{
+  "$comment": "RenderSpec v1 Canonical Example - Demonstrates all key features",
+  
+  "schema_version": "relay-render-v1",
+  
+  "generated_from": {
+    "event_id": 42,
+    "commit_ref": "work.W123@c3",
+    "timestamp": "2026-01-28T10:30:00Z"
+  },
+  
+  "nodes": [
+    {
+      "$comment": "SCV Unit (Working state, attached to filament)",
+      "id": "unit.alice.001",
+      "kind": "unit",
+      "transform": {
+        "position": [2.0, 1.0, 0.4],
+        "rotation": [0.0, 0.0, 0.0, 1.0],
+        "scale": [1.0, 1.0, 1.0]
+      },
+      "material": "scv_working",
+      "props": {
+        "state": "Working",
+        "attached_filament": "work.W123",
+        "current_task_filament": "work.W123",
+        "rank": "Engineer"
+      }
+    },
+    
+    {
+      "$comment": "Filament with 3 commits (polyline segments + timeboxes)",
+      "id": "filament.work.W123",
+      "kind": "filament",
+      "geometry": {
+        "points": [
+          [0.0, 0.0, 0.0],
+          [1.0, 0.5, 0.2],
+          [2.0, 1.0, 0.4],
+          [3.0, 1.5, 0.6]
+        ],
+        "radii": [0.05, 0.05, 0.05, 0.05],
+        "commit_indices": [1, 2, 3]
+      },
+      "material": "encrypted_channel",
+      "props": {
+        "filament_id": "work.W123",
+        "head_commit_index": 3,
+        "rotation_params": {
+          "twist_rate": 0.5,
+          "direction": "clockwise"
+        }
+      }
+    },
+    
+    {
+      "$comment": "Timebox @c1 (First commit)",
+      "id": "timebox.work.W123@c1",
+      "kind": "timebox",
+      "transform": {
+        "position": [0.0, 0.0, 0.0],
+        "rotation": [0.0, 0.0, 0.0, 1.0],
+        "scale": [0.1, 0.1, 0.1]
+      },
+      "material": "commit_accepted",
+      "props": {
+        "commit_ref": "work.W123@c1",
+        "commit_index": 1,
+        "op_type": "TASK_ASSIGN",
+        "author_unit_ref": "unit.manager.001",
+        "verification_state": "accepted"
+      }
+    },
+    
+    {
+      "$comment": "Timebox @c2 (Second commit)",
+      "id": "timebox.work.W123@c2",
+      "kind": "timebox",
+      "transform": {
+        "position": [1.0, 0.5, 0.2],
+        "rotation": [0.0, 0.0, 0.0, 1.0],
+        "scale": [0.1, 0.1, 0.1]
+      },
+      "material": "commit_accepted",
+      "props": {
+        "commit_ref": "work.W123@c2",
+        "commit_index": 2,
+        "op_type": "UNIT_ATTACH",
+        "author_unit_ref": "unit.alice.001",
+        "verification_state": "accepted"
+      }
+    },
+    
+    {
+      "$comment": "Timebox @c3 (Current commit - OUTPUT_PROPOSED)",
+      "id": "timebox.work.W123@c3",
+      "kind": "timebox",
+      "transform": {
+        "position": [2.0, 1.0, 0.4],
+        "rotation": [0.0, 0.0, 0.0, 1.0],
+        "scale": [0.1, 0.1, 0.1]
+      },
+      "material": "commit_accepted",
+      "props": {
+        "commit_ref": "work.W123@c3",
+        "commit_index": 3,
+        "op_type": "OUTPUT_PROPOSED",
+        "author_unit_ref": "unit.alice.001",
+        "verification_state": "accepted",
+        "payload_summary": "Proposed solution for task"
+      }
+    },
+    
+    {
+      "$comment": "Globe (World container)",
+      "id": "globe.world",
+      "kind": "globe",
+      "transform": {
+        "position": [0.0, 0.0, 0.0],
+        "rotation": [0.0, 0.0, 0.0, 1.0],
+        "scale": [10.0, 10.0, 10.0]
+      },
+      "material": "world_surface",
+      "props": {
+        "radius": 10.0,
+        "segments": 64
+      }
+    }
+  ],
+  
+  "links": [
+    {
+      "$comment": "c2 depends on c1 (causal input)",
+      "from_id": "timebox.work.W123@c2",
+      "to_id": "timebox.work.W123@c1",
+      "link_type": "input",
+      "material": "causal_link_input"
+    },
+    {
+      "$comment": "c3 depends on c2 (causal input)",
+      "from_id": "timebox.work.W123@c3",
+      "to_id": "timebox.work.W123@c2",
+      "link_type": "input",
+      "material": "causal_link_input"
+    }
+  ],
+  
+  "animation_intents": [
+    {
+      "$comment": "Encryption twist animation (triggered when filament becomes encrypted)",
+      "target_id": "filament.work.W123",
+      "trigger_event_id": 42,
+      "animation_type": "twist",
+      "duration_ms": 1000,
+      "params": {
+        "twist_rate": 0.5,
+        "direction": "clockwise",
+        "intensity": 1.0
+      }
+    },
+    {
+      "$comment": "Work completion pulse (when OUTPUT_PROPOSED accepted)",
+      "target_id": "unit.alice.001",
+      "trigger_event_id": 42,
+      "animation_type": "pulse",
+      "duration_ms": 500,
+      "params": {
+        "intensity": 1.0,
+        "color": "green"
+      }
+    },
+    {
+      "$comment": "Timebox glow (when commit accepted)",
+      "target_id": "timebox.work.W123@c3",
+      "trigger_event_id": 42,
+      "animation_type": "glow",
+      "duration_ms": 800,
+      "params": {
+        "intensity": 0.8,
+        "color": "green"
+      }
+    }
+  ]
+}

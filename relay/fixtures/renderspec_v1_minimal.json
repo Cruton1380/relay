@@ -1,0 +1,29 @@
+{
+  "$comment": "RenderSpec v1 Minimal Example - Simplest valid scene",
+  
+  "schema_version": "relay-render-v1",
+  
+  "generated_from": {
+    "timestamp": "2026-01-28T10:00:00Z"
+  },
+  
+  "nodes": [
+    {
+      "id": "unit.test.001",
+      "kind": "unit",
+      "transform": {
+        "position": [0.0, 0.0, 0.0],
+        "rotation": [0.0, 0.0, 0.0, 1.0],
+        "scale": [1.0, 1.0, 1.0]
+      },
+      "material": "scv_idle",
+      "props": {
+        "state": "Idle"
+      }
+    }
+  ],
+  
+  "links": [],
+  
+  "animation_intents": []
+}
