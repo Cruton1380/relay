@@ -342,6 +342,7 @@ async fn options_capabilities(
     let mut repos_json: Vec<serde_json::Value> = Vec::new();
     let mut branches_for_current: Vec<String> = Vec::new();
     let mut relay_config: Option<RelayConfig> = None;
+    let mut current_last_written_at: Option<String> = None;
 
     for name in &repo_names {
         if let Some(repo) = open_repo(&state.repo_path, name) {
@@ -354,16 +355,19 @@ async fn options_capabilities(
                     }
                 }
             }
+            let last_written_at = repo_last_written_at(&repo);
             if Some(name) == repo_name.as_ref() {
                 branches_for_current = branches.clone();
                 // Load .relay.yaml from the current repo/branch for client hooks
                 if relay_config.is_none() {
                     relay_config = read_relay_config(&repo, &branch);
                 }
+                current_last_written_at = last_written_at.clone();
             }
             repos_json.push(serde_json::json!({
                 "name": name,
                 "branches": serde_json::Value::Object(heads_map),
+                "lastWrittenAt": last_written_at,
             }));
         }
     }
@@ -375,6 +379,7 @@ async fn options_capabilities(
         "repos": repos_json,
         "currentBranch": branch,
         "currentRepo": repo_name.clone().unwrap_or_default(),
+        "lastWrittenAt": current_last_written_at,
     });
 
     // Merge relay configuration (client hooks, etc.) if available
@@ -428,6 +433,55 @@ fn bare_repo_names(root: &PathBuf) -> Vec<String> {
 fn open_repo(root: &PathBuf, name: &str) -> Option<Repository> {
     let p = root.join(format!("{}.git", name));
     Repository::open_bare(p).ok()
+}
+
+/// Returns the committer timestamp of the most recent commit across all refs as an ISO-8601 string,
+/// or `None` if the repository has no commits.
+fn repo_last_written_at(repo: &Repository) -> Option<String> {
+    let mut latest: Option<i64> = None;
+    if let Ok(mut refs) = repo.references() {
+        for r in refs.flatten() {
+            if let Ok(commit) = r.peel_to_commit() {
+                let t = commit.committer().when().seconds();
+                latest = Some(match latest {
+                    Some(prev) => prev.max(t),
+                    None => t,
+                });
+            }
+        }
+    }
+    latest.map(|secs| {
+        // Format as RFC 3339 / ISO 8601 UTC without external chrono dependency
+        let s = secs;
+        // Days since Unix epoch
+        let days = s / 86400;
+        let rem = s % 86400;
+        let hh = rem / 3600;
+        let mm = (rem % 3600) / 60;
+        let ss = rem % 60;
+        // Gregorian calendar computation (valid for dates after 1970-01-01)
+        let (year, month, day) = days_to_ymd(days);
+        format!(
+            "{:04}-{:02}-{:02}T{:02}:{:02}:{:02}Z",
+            year, month, day, hh, mm, ss
+        )
+    })
+}
+
+/// Convert days since Unix epoch (1970-01-01) to (year, month, day).
+fn days_to_ymd(mut days: i64) -> (i32, u32, u32) {
+    // Algorithm from https://howardhinnant.github.io/date_algorithms.html (civil_from_days)
+    days += 719468;
+    let era = if days >= 0 { days } else { days - 146096 } / 146097;
+    let doe = days - era * 146097;
+    let yoe = (doe - doe / 1460 + doe / 36524 - doe / 146096) / 365;
+    let y = yoe + era * 400;
+    let doy = doe - (365 * yoe + yoe / 4 - yoe / 100);
+    let mp = (5 * doy + 2) / 153;
+    let d = doy - (153 * mp + 2) / 5 + 1;
+    let m = if mp < 10 { mp + 3 } else { mp - 9 };
+    let y = if m <= 2 { y + 1 } else { y };
+    (y as i32, m as u32, d as u32)
 }
 
 fn strict_repo_from(root: &PathBuf, headers: &HeaderMap) -> Option<String> {
@@ -1215,6 +1269,58 @@ mod tests {
         // Verify CORS headers
         assert!(parts.headers.contains_key("Access-Control-Allow-Origin"));
         assert!(parts.headers.contains_key("Access-Control-Allow-Methods"));
+    }
+
+    /// Test OPTIONS response includes lastWrittenAt for a repo with commits
+    #[tokio::test]
+    async fn test_options_last_written_at() {
+        let repo_dir = tempdir().unwrap();
+
+        let repo_path = repo_dir.path().join("repo.git");
+        let repo = Repository::init_bare(&repo_path).unwrap();
+
+        let sig = Signature::now("relay", "relay@local").unwrap();
+        let tb = repo.treebuilder(None).unwrap();
+        let tree_id = tb.write().unwrap();
+        let tree = repo.find_tree(tree_id).unwrap();
+        let _commit_oid = repo
+            .commit(Some("refs/heads/main"), &sig, &sig, "init", &tree, &[])
+            .unwrap();
+
+        let state = AppState {
+            repo_path: repo_dir.path().to_path_buf(),
+            static_paths: Vec::new(),
+        };
+
+        let headers = HeaderMap::new();
+        let (_parts, body) = options_capabilities(State(state), headers, None)
+            .await
+            .into_response()
+            .into_parts();
+
+        let body_bytes = axum::body::to_bytes(body, usize::MAX).await.unwrap().to_vec();
+        let json: serde_json::Value = serde_json::from_slice(&body_bytes).unwrap();
+
+        // Top-level lastWrittenAt should be a non-null string
+        assert!(json["lastWrittenAt"].is_string(), "lastWrittenAt should be a string");
+        let ts = json["lastWrittenAt"].as_str().unwrap();
+        assert!(ts.ends_with('Z'), "lastWrittenAt should be UTC ISO-8601");
+
+        // Per-repo entry should also carry lastWrittenAt
+        let repos = json["repos"].as_array().unwrap();
+        assert_eq!(repos.len(), 1);
+        assert!(repos[0]["lastWrittenAt"].is_string());
+    }
+
+    /// Test days_to_ymd for known Unix epoch dates
+    #[test]
+    fn test_days_to_ymd() {
+        // 1970-01-01 is day 0
+        assert_eq!(days_to_ymd(0), (1970, 1, 1));
+        // 2000-01-01: 10957 days after epoch
+        assert_eq!(days_to_ymd(10957), (2000, 1, 1));
+        // 2024-02-29 (leap day): 19783 days after epoch
+        assert_eq!(days_to_ymd(19783), (2024, 2, 29));
     }
 
     /// Test branch_from correctly extracts branch from header

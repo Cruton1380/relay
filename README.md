@@ -1,4 +1,16 @@
-```
+# Relay
+
+**Relay** is a decentralized, Git-native Web 3.0 platform. It replaces traditional server-centric web infrastructure with a peer-to-peer model in which git repositories are the single source of truth for both content and application logic.
+
+Key capabilities:
+- **HTTP API over bare git repos** — clients read (`GET`), write (`PUT`/`DELETE`), and discover (`OPTIONS`) any path directly from a git repository branch, with no separate database or CMS.
+- **Hook-driven rendering** — JSX/TSX hooks stored inside the repository define how content is fetched, queried, and displayed; the client transpiles and executes them at runtime.
+- **Multi-peer replication** — Master Peer Nodes mirror repositories automatically; the client performs its own load-balancing and failover.
+- **Unified cross-platform styling** — the `themed-styler` Rust crate emits CSS for web and style objects for React Native from the same theme definitions.
+
+> **relay vs relay-3d** — This repository is the core Relay platform (server, web client, React Native client, Rust crates). There is no separate "relay-3d" project in this repository. If you are looking for 3D / spatial-web functionality, it has not yet been added; open an issue to discuss.
+
+---
 
 ## Containerized Deployment (Nginx + Certbot, unified config)
 
